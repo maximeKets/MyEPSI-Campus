@@ -12,19 +12,22 @@ class FloorSeeder extends Seeder
 {
     public function run()
     {
-        // Crée 3 étages
-        Floor::factory()
-            ->count(3)
-            ->create()
-            ->each(function ($floor) {
-                // Pour chaque étage, créer 15 chambres
-                Room::factory()
-                    ->count(15)
-                    ->create(['floor_id' => $floor->id])
-                    ->each(function ($room) {
-                        // Pour chaque chambre, créer une info
-                        Info::factory()->create(['room_id' => $room->id]);
-                    });
+        $floor0 = Floor::factory()->create(['number' => 0]);
+        Room::factory()->count(2)->create(['floor_id' => $floor0->id])
+            ->each(function ($room) {
+                Info::factory()->create(['room_id' => $room->id]);
             });
+
+        $floor1 = Floor::factory()->create(['number' => 1]);
+        foreach (range(101, 105) as $roomNumber) {
+            $room = Room::factory()->create(['floor_id' => $floor1->id, 'number' => $roomNumber]);
+            Info::factory()->create(['room_id' => $room->id]);
+        }
+
+        $floor2 = Floor::factory()->create(['number' => 2]);
+        foreach (range(201, 205) as $roomNumber) {
+            $room = Room::factory()->create(['floor_id' => $floor2->id, 'number' => $roomNumber]);
+            Info::factory()->create(['room_id' => $room->id]);
+        }
     }
 }
