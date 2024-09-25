@@ -21,6 +21,8 @@ class RoomFactory extends Factory
             'number' => $this->faker->numberBetween(1, 100),
             "name" => $this->faker->text(60),
             'floor_id' => Floor::factory(),
+            "description" => $this->faker->text(60),
+            "is_avalable" => $this->faker->boolean(),
         ];
     }
 }

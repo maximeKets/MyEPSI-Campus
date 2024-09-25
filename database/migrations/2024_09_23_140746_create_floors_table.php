@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('floors', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
+            $table->string('description')->nullable();
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }

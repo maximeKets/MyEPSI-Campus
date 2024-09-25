@@ -10,6 +10,10 @@ class Room extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name", 'number', 'description', 'is_available', 'floor_id'
+    ];
+
     public function floor()
     {
         return $this->belongsTo(Floor::class);
@@ -17,7 +21,7 @@ class Room extends Model
 
     public function infos()
     {
-        return $this->hasOne(Info::class);
+        return $this->hasMany(Info::class);
     }
 
 }

@@ -1,0 +1,6 @@
+@import 'flowbite'; /* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Flowbite styles (if needed) */

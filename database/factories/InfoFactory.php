@@ -17,7 +17,8 @@ class InfoFactory extends Factory
     public function definition(): array
     {
         return [
-            "description" => $this->faker->text(60),
+            "title" => $this->faker->text(20),
+            "content" => $this->faker->text(60),
             'room_id' => null,
         ];
     }

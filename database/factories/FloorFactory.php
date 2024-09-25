@@ -21,6 +21,8 @@ class FloorFactory extends Factory
 
         return [
             'number' => $value,
+            "description" => $this->faker->text(30),
+            "is_available" => $this->faker->boolean(),
         ];
     }
 }

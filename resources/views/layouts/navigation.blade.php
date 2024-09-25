@@ -12,8 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('floors.index')" :active="request()->routeIs('floors.*')">
+                        Etages
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms.*')">
+Salles
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
+Cours
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('infos.index')" :active="request()->routeIs('infos.*')">
+Infos
                     </x-nav-link>
                 </div>
             </div>
