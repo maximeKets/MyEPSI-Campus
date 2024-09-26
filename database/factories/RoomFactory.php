@@ -25,7 +25,7 @@ class RoomFactory extends Factory
             "name" => $this->faker->text(60),
             'floor_id' => Floor::factory(),
             'description' => $this->jokes[array_rand($this->jokes)],
-            "is_available" => $this->faker->boolean(),
+            "is_available" => true
         ];
     }
 }

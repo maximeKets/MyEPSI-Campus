@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // nom de la chambre
             $table->integer('number'); // numéro de la chambre
-            $table->string('description')->nullable(); // description de la chambre
+            $table->text('description')->nullable(); // description de la chambre
             $table->boolean('is_available')->default(true); // disponibilité de la chambre
             $table->foreignId('floor_id')->constrained()->onDelete('cascade');
             $table->timestamps();
