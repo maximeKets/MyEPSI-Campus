@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class FloorController extends Controller
 {
     protected $schemaService;
-    protected $modelName = 'Etage';
     protected $routeName = 'floors';
 
     public function __construct(SchemaService $schemaService)
@@ -21,9 +20,8 @@ class FloorController extends Controller
     {
         $items = Floor::all();
         $columns = (new Floor)->getFillable();
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
-        return view('crud.index', compact('items', 'modelName', 'routeName', 'columns'));
+        return view('crud.index', compact('items', 'routeName', 'columns'));
     }
 
     public function create()
@@ -60,10 +58,9 @@ class FloorController extends Controller
     {
         $columns = (new Floor)->getFillable();
         $inputTypes = $this->schemaService->getColumnTypes('floors');
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
         $item = $floor;
-        return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
+        return view('crud.form', compact('item',  'routeName', 'columns', 'inputTypes'));
     }
 
     private function validateRequest(Request $request, Floor $floor = null)

@@ -16,7 +16,8 @@ class InfoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'description' => $this->description,
+            'content' => $this->content,
+            'type' => $this->type,
             'room_id' => $this->room_id,
         ];    }
 }

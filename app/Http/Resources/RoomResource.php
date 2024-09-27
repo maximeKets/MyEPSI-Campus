@@ -17,8 +17,9 @@ class RoomResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            "number" => $this->number,
+            "description" => $this->description,
             'floor_id' => $this->floor_id,
+            "is_available" => $this->is_available,
             'infos' => InfoResource::collection($this->whenLoaded('infos')),
         ];    }
 }

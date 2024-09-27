@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ ucfirst($modelName) }} List
+            {{ ucfirst($routeName) }} List
         </h2>
     </x-slot>
     <div class="container mx-auto py-6">
 
         <div class="mb-4">
-            <a href="{{ route($routeName . '.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Creer {{ ucfirst($modelName) }}</a>
+            <a href="{{ route($routeName . '.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create {{ ucfirst($routeName) }}</a>
         </div>
 
         @if (session('success'))

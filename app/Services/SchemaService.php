@@ -14,7 +14,6 @@ public function getColumnTypes($tableName)
 
     foreach ($columns as $column) {
         $columnType = DB::getSchemaBuilder()->getColumnType($tableName, $column); // Get the column type
-        dump($columnType);
         $columnTypes[$column] = $this->mapToFormType($columnType); // Map to form input type and add to array
     }
     return $columnTypes;

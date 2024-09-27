@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     protected $schemaService;
-    protected $modelName = 'Course';
     protected $routeName = 'courses';
 
     public function __construct(SchemaService $schemaService)
@@ -21,9 +20,8 @@ class CourseController extends Controller
     {
         $items = Course::all();
         $columns = (new Course)->getFillable();
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
-        return view('crud.index', compact('items', 'modelName', 'routeName', 'columns'));
+        return view('crud.index', compact('items', 'routeName', 'columns'));
     }
 
     public function create()
@@ -60,10 +58,9 @@ class CourseController extends Controller
     {
         $columns = (new Course)->getFillable();
         $inputTypes = $this->schemaService->getColumnTypes('courses');
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
         $item = $course;
-        return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
+        return view('crud.form', compact('item', 'routeName', 'columns', 'inputTypes'));
     }
 
     private function validateRequest(Request $request)

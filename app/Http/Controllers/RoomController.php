@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class RoomController extends Controller
 {
     protected $schemaService;
-    protected $modelName = 'Classe';
     protected $routeName = 'rooms';
 
     public function __construct(SchemaService $schemaService)
@@ -21,9 +20,8 @@ class RoomController extends Controller
     {
         $items = Room::all();
         $columns = (new Room)->getFillable();
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
-        return view('crud.index', compact('items', 'modelName', 'routeName', 'columns'));
+        return view('crud.index', compact('items', 'routeName', 'columns'));
     }
 
     public function create()
@@ -60,10 +58,9 @@ class RoomController extends Controller
     {
         $columns = (new Room)->getFillable();
         $inputTypes = $this->schemaService->getColumnTypes('rooms');
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
         $item = $room;
-        return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
+        return view('crud.form', compact('item',  'routeName', 'columns', 'inputTypes'));
     }
 
     private function validateRequest(Request $request, Room $room = null)

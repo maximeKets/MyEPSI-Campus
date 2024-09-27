@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class InfoController extends Controller
 {
     protected $schemaService;
-    protected $modelName = 'Info';
     protected $routeName = 'infos';
 
     public function __construct(SchemaService $schemaService)
@@ -21,9 +20,8 @@ class InfoController extends Controller
     {
         $items = Info::all();
         $columns = (new Info)->getFillable();
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
-        return view('crud.index', compact('items', 'modelName', 'routeName', 'columns'));
+        return view('crud.index', compact('items',  'routeName', 'columns'));
     }
 
     public function create()
@@ -60,10 +58,9 @@ class InfoController extends Controller
     {
         $columns = (new Info)->getFillable();
         $inputTypes = $this->schemaService->getColumnTypes('infos');
-        $modelName = $this->modelName;
         $routeName = $this->routeName;
         $item = $info;
-        return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
+        return view('crud.form', compact('item',  'routeName', 'columns', 'inputTypes'));
     }
 
     private function validateRequest(Request $request)

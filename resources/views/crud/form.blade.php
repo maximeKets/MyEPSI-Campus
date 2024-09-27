@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-bold">{{ isset($item) ? 'Edit' : 'Create' }} {{ $modelName }}</h1>
+        <h1 class="text-2xl font-bold">{{ isset($item) ? 'Edit' : 'Create' }} {{ $routeName }}</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
