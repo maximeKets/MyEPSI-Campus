@@ -14,12 +14,12 @@ class RoomController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return RoomResource::collection(Room::with('infos.courses')->get());
+        return RoomResource::collection(Room::with(['infos', 'courses'])->get());
     }
 
 
     public function show(Room $room) : RoomResource
     {
-        return new RoomResource($room->load('infos.courses'));
+        return new RoomResource($room->load(['infos', 'courses']));
     }
 }

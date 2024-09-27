@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
 use App\Models\Course; // Import the Course model
 
 class CourseController extends Controller
 {
-    // app/Http/Controllers/Api/CourseController.php
+
+    public function index()
+    {
+       return CourseResource::collection(Course::all());
+    }
+    public function show(Course $course)
+    {
+        return new CourseResource($course);
+    }
 
     public function store(Request $request)
     {
