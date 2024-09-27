@@ -2,63 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Info;
+use App\Services\SchemaService;
 use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $schemaService;
+    protected $modelName = 'Info';
+    protected $routeName = 'infos';
+
+    public function __construct(SchemaService $schemaService)
+    {
+        $this->schemaService = $schemaService;
+    }
+
     public function index()
     {
-        //
+        $items = Info::all();
+        $columns = (new Info)->getFillable();
+        $modelName = $this->modelName;
+        $routeName = $this->routeName;
+        return view('crud.index', compact('items', 'modelName', 'routeName', 'columns'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return $this->formView();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validateRequest($request);
+        Info::create($validated);
+        return redirect()->route('infos.index')->with('success', 'Info created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Info $info)
     {
-        //
+        return $this->formView($info);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Info $info)
     {
-        //
+        $validated = $this->validateRequest($request);
+        $info->update($validated);
+        return redirect()->route('infos.index')->with('success', 'Info updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Info $info)
     {
-        //
+        $info->delete();
+        return redirect()->route('infos.index')->with('success', 'Info deleted successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    private function formView(Info $info = null)
     {
-        //
+        $columns = (new Info)->getFillable();
+        $inputTypes = $this->schemaService->getColumnTypes('infos');
+        $modelName = $this->modelName;
+        $routeName = $this->routeName;
+        $item = $info;
+        return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
+    }
+
+    private function validateRequest(Request $request)
+    {
+        return $request->validate([
+            'type' => 'required|string|max:255',
+            'content' => 'required|string',
+            'room_id' => 'required|exists:rooms,id',
+        ]);
     }
 }

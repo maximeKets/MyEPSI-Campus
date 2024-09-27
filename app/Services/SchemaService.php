@@ -16,7 +16,6 @@ public function getColumnTypes($tableName)
         $columnType = DB::getSchemaBuilder()->getColumnType($tableName, $column); // Get the column type
         dump($columnType);
         $columnTypes[$column] = $this->mapToFormType($columnType); // Map to form input type and add to array
-
     }
     return $columnTypes;
 }
@@ -30,6 +29,7 @@ public function getColumnTypes($tableName)
             'int' => 'number',
             'text' => 'textarea',
             'boolean' => 'checkbox',
+            'time' => 'time',
             'timestamp' => 'datetime-local',
             'date' => 'date',
             'float' => 'number',

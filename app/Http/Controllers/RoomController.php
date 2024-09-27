@@ -45,7 +45,7 @@ class RoomController extends Controller
 
     public function update(Request $request, Room $room)
     {
-        $validated = $this->validateRequest($request);
+        $validated = $this->validateRequest($request, $room);
         $room->update($validated);
         return redirect()->route('rooms.index')->with('success', 'Room updated successfully.');
     }
@@ -66,11 +66,14 @@ class RoomController extends Controller
         return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
     }
 
-    private function validateRequest(Request $request)
+    private function validateRequest(Request $request, Room $room = null)
     {
+
+     $roomNumber = $room ? $room->id : "NULL";
+
         return $request->validate([
             'name' => 'required|string|max:255',
-            'number' => 'required|integer|unique:rooms,number',
+            'number' => 'required|integer|unique:rooms,number, ' . $roomNumber,
             'description' => 'required|string|max:255',
             'is_available' => 'required|boolean',
             'floor_id' => 'required|exists:floors,id',

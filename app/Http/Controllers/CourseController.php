@@ -68,14 +68,23 @@ class CourseController extends Controller
 
     private function validateRequest(Request $request)
     {
+        $request->merge([
+            'start_hours' => $this->addSeconds($request->input('start_hours')),
+            'end_hours' => $this->addSeconds($request->input('end_hours')),
+        ]);
+
         return $request->validate([
             'title' => 'required|string|max:255',
             'teacher' => 'required|string|max:255',
             'date' => 'required|date',
             'promotion' => 'required|string|max:255',
-            'start_hours' => 'required|date_format:H:i',
-            'end_hours' => 'required|date_format:H:i',
+            'start_hours' => 'required|date_format:H:i:s',
+            'end_hours' => 'required|date_format:H:i:s',
             'room_id' => 'required|exists:rooms,id',
         ]);
+    }
+    private function addSeconds($time)
+    {
+        return $time . ':00';
     }
 }

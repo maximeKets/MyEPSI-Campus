@@ -13,15 +13,15 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('floors.index')" :active="request()->routeIs('floors.*')">
-                        Etages
+                        Floors
                     </x-nav-link>
 
                     <x-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms.*')">
-Salles
+Rooms
                     </x-nav-link>
 
                     <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
-Cours
+Courses
                     </x-nav-link>
 
                     <x-nav-link :href="route('infos.index')" :active="request()->routeIs('infos.*')">

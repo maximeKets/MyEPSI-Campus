@@ -45,7 +45,7 @@ class FloorController extends Controller
 
     public function update(Request $request, Floor $floor)
     {
-        $validated = $this->validateRequest($request);
+        $validated = $this->validateRequest($request, $floor);
         $floor->update($validated);
         return redirect()->route('floors.index')->with('success', 'Floor updated successfully.');
     }
@@ -66,10 +66,12 @@ class FloorController extends Controller
         return view('crud.form', compact('item', 'modelName', 'routeName', 'columns', 'inputTypes'));
     }
 
-    private function validateRequest(Request $request)
+    private function validateRequest(Request $request, Floor $floor = null)
     {
+        $floorId = $floor ? $floor->id : 'NULL';  // S'assurer que l'ID est bien géré, même s'il est nul
+
         return $request->validate([
-            'number' => 'required|integer|unique:floors,number',
+            'number' => 'required|integer|unique:floors,number,' . $floorId,
             'description' => 'required|string|max:255',
             'is_available' => 'required|boolean',
         ]);
